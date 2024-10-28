@@ -10,7 +10,7 @@ from .serializers import SerialSerializer
 
 import json
 
-from . import funcoes as fn
+from . import utils as fn
 
 @api_view(['GET', 'POST'])
 def get_or_create_serial(request, number_serial=None):
@@ -19,6 +19,7 @@ def get_or_create_serial(request, number_serial=None):
     if request.method == 'GET' and number_serial is not None:
         try:
             serial = SerialNumber.objects.get(number_serial=number_serial)
+            serializer = SerialSerializer(serial) 
             return Response(serializer.data, status=status.HTTP_200_OK)
         except SerialNumber.DoesNotExist:
             return Response({
@@ -29,11 +30,10 @@ def get_or_create_serial(request, number_serial=None):
         serializer = SerialSerializer(seriais, many=True)
         return Response(serializer.data)
 
-    # Para requisições POST, criar um novo número serial
     elif request.method == 'POST':
         serializer = SerialSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()  # Salva o novo número serial no banco
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:

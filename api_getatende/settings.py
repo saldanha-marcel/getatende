@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'maquina_obsoleta'
+    'maquina_obsoleta',
+    'ecommerce'
 ]
 
 MIDDLEWARE = [
@@ -117,8 +119,29 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Get Atende",
+    "site_brand": "Get Atende",
+    "copyright": "Get Atende",
+    "welcome_sign": "Seja bem vindo",
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "users.User": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "ecommerce.CnpjEcommerce": "fas fa-building",
+        "maquina_obsoleta.SerialNumber": "fas fa-cogs",
+    },
+    
+    "user_avatar": None,
+    "site_logo": "img/getatende_logo.jpeg",
+}
