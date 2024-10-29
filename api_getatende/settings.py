@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'api_getatende.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dbgetatende',
+        'USER': 'dbgetatende_user',
+        'PASSWORD': 'pwTE4rprqzLKHI7IMjAfimWNtnq1H1ps',
+        'HOST': 'dpg-csfr4f5ds78s7390aig0-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
 
