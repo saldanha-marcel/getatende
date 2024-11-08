@@ -67,3 +67,28 @@ def create_multiple_serials(request):
         return Response({'created_serials': created_serials, 'errors': errors}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({'created_serials': created_serials}, status=status.HTTP_201_CREATED)
+
+@api_view(['DELETE'])
+def delete_multiple_serials(request):
+    """Endpoint para excluir múltiplos números de série fornecidos em uma lista, apenas via DELETE."""
+    if 'numbers' not in request.data:
+        return Response({'error': 'Field "numbers" is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    numbers = request.data['numbers']
+    not_found = []
+    deleted_count = 0
+
+    for number in numbers:
+        try:
+            serial = SerialNumber.objects.get(number_serial=number)
+            serial.delete()
+            deleted_count += 1
+        except SerialNumber.DoesNotExist:
+            not_found.append(number)
+
+    response_data = {
+        'deleted_count': deleted_count,
+        'not_found': not_found
+    }
+
+    return Response(response_data, status=status.HTTP_207_MULTI_STATUS if not_found else status.HTTP_200_OK)
