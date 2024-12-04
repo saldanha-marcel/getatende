@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-rkmg5g%$h=+=+=#5&l&91pcmukjz@9spn(6yye41+y_^r&fmc$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -80,14 +80,22 @@ WSGI_APPLICATION = 'api_getatende.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbgetatende',
-        'USER': 'dbgetatende_user',
-        'PASSWORD': 'pwTE4rprqzLKHI7IMjAfimWNtnq1H1ps',
-        'HOST': 'dpg-csfr4f5ds78s7390aig0-a.oregon-postgres.render.com',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# Banco de Dados Postgresql
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dbgetatende',
+#         'USER': 'dbgetatende_user',
+#         'PASSWORD': 'pwTE4rprqzLKHI7IMjAfimWNtnq1H1ps',
+#         'HOST': 'dpg-csfr4f5ds78s7390aig0-a.oregon-postgres.render.com',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
